@@ -1,16 +1,12 @@
 
 {{!-- TODO - write the template to show all posts on the / route --}}
+
 <h1>ALL POSTS</h1>
 
-<div class ="card">
-    <div class ="column">
-        {{#each posts as | userPost | }}
-        {{#each comments as | comment |}}
-        {{> post this}}
-        {{> comments this}}
-        {{else}}
-        <h3>No posts yet!</h3>
-        {{/each}}
-        {{/each}}
-    </div>
+{{#each posts as | userPost | }}
+{{> post this}}
+{{else}}
+<div class="p-2">
+    <h2>There are currently no posts</h2>
 </div>
+{{/each}}
