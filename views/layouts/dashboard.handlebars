@@ -4,9 +4,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>The Tech Blog</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script> 
   </head>
 
   <body>
@@ -14,10 +15,15 @@
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/dashboard">Dashboard</a></li>
-        {{#if loggedIn}}
-        <li><button id="logout" class="btn btn-primary">Logout</button></li>
+        {{!-- {{#if loggedIn}}
+        <li>loggout</li>
         {{else}}
         <li><a href="/login">Login</a></li>
+        {{/if}} --}}
+        {{#if loggedIn}}
+        <li><button id="logout" class="btn-no-style">Logout</button></li>
+        {{else}}
+        <li><a href="/login" class="btn btn-primary">Login</a></li>
         {{/if}}
       </ul>
     </nav>

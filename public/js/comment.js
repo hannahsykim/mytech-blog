@@ -1,12 +1,28 @@
-{{#each comments as |comment|}}
-    <div class="card mb-3">
-        <div class="card-body">
-            <p class="card-text">{{comment.comment_text}}</p>
-            <p class="card-text">Posted by {{comment.user.username}} on {{comment.createdAt}}</p>  
-
-            {{#if comment.user.id}}
-                <a href="/comment/{{comment.id}}/edit" class="btn btn-primary">Edit</a>
-                <a href="/comment/{{comment.id}}/delete" class="btn btn-danger">Delete</a>
-            {{/if}}
-    </div> 
-{{/each}}
+const commentFormHandler = async (event) => {
+    event.preventDefault();
+  
+    const commentArea = document.querySelector("#comment-input").value.trim();
+  
+    const post_id = window.location.toString().split("/")[
+      window.location.toString().split("/").length - 1
+    ];
+  
+    //   if (content) prevents users from submitting empty comments
+    if (commentArea) {
+      const response = await fetch("/api/comments", {
+        method: "POST",
+        body: JSON.stringify({ post_id, commentArea }),
+        headers: { "Content-Type": "application/json" },
+      });
+  
+      if (response.ok) {
+        document.location.reload();
+      } else {
+        alert(response.statusText);
+      }
+    }
+  };
+  
+  document
+    .querySelector(".comment-form")
+    .addEventListener("submit", commentFormHandler);
