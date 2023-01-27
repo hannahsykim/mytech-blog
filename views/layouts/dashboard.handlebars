@@ -1,6 +1,6 @@
 
 {{! A boilerplate dashboard layout is completed for you, feel free to modify and style to your liking }}
-
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -14,8 +14,11 @@
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/dashboard">Dashboard</a></li>
+        {{#if loggedIn}}
+        <li><button id="logout" class="btn btn-primary">Logout</button></li>
+        {{else}}
         <li><a href="/login">Login</a></li>
-        <li><a href="#" id="logout-link">Logout</a></li>
+        {{/if}}
       </ul>
     </nav>
     <header>
@@ -25,8 +28,11 @@
     <main>
       {{{body}}}
     </main>
+
+    {{#if loggedIn}}
+      <script src="/js/logout.js">Logout</script>
+    {{/if}} 
+
   </body>
 
 </html>
-{{! inline script to handle click of logout button }}
-<script type="text/javascript" src="/public/js/logout.js"></script>
