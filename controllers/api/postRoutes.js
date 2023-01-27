@@ -21,6 +21,7 @@ router.post("/", withAuth, async (req, res) => {
     }
 });
 
+
 // TODO - create a PUT route for updating a post's title or body
 // This should be a protected route, so you'll need to use the withAuth middleware
 router.put("/:id", withAuth, async (req, res) => {

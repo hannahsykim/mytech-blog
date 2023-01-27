@@ -1,6 +1,8 @@
+{{#each posts as | userPost | }}
+    {{> post this}}
+    {{> comment this}}
+{{/each}}
 
-{{!-- display blog post info --}}
-{{> post}}
 {{!-- display comment form and already posted comments ONLY if logged in --}}
 {{#if loggedIn}}
 <div class="card">
@@ -18,7 +20,7 @@
 </div>
 {{/if}}
 {{!-- display already posted comments --}}
-{{> comments}}
+
 
 </div>
 

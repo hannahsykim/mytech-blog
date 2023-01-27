@@ -31,12 +31,11 @@ router.get('/post/:id', async (req, res) => {
         }
       ]
     });
-    if (!singlePost) {
-      res.status(404).json({ message: 'No post found with this id!' });
-      return;
-    }
-    res.status(200).json(singlePost);
-    res.render('single-post', { singlePost });
+    
+    const singlePostData = singlePost.get({ plain: true });
+
+    res.status(200).json(singlePostData);
+    res.render("individual-post", { singlePostData });
   } catch (err) {
     res.status(500).json(err);
   }
