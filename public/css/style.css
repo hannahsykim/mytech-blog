@@ -1,2 +1,171 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial;
+    padding: 20px;
+    background: #f1f1f1;
+  }
 
-/* TODO - Write your CSS here */
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: darkgray;
+  }
+
+  li {
+    float: right;
+  }
+  
+  li a {
+    display: block;
+    color: #04AA6D;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li a:hover {
+    background-color: rgb(43, 41, 41);
+    color: white;
+  }
+
+  /* Header/Blog Title */
+  header {
+    padding: 30px;
+    font-size: 40px;
+    text-align: center;
+    background: #04AA6D; 
+  }
+  #btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 6px 2px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #btn:hover {
+    opacity: 0.8;
+  }
+  a:link {
+    text-decoration: none;
+    color: white;
+  }
+
+  a:visited {
+    text-decoration: none;
+    color: white;
+  }
+
+  /* mouse over link */
+  a:hover {
+    color: black;
+  }
+  
+  /* Create two unequal columns that floats next to each other */
+  /* Left column */
+  .column {
+    float: left;
+    width: 75%;
+  }
+  
+
+  
+  /* Add a card effect for articles */
+  .card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  } 
+
+
+  form {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    display: inline-block;
+  }
+  
+  input {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 6px 2px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    ;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+
+  .container {
+    align-content: center;
+  }
+  
+
+  .add-post {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+    background-color: #04AA6D;
+  }
+
+  .container-fluid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+  }
+  
+  /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {
+      width: 100%;
+      padding: 0;
+    }
+  }
+

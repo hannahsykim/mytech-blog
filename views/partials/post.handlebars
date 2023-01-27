@@ -1,6 +1,10 @@
-<div>
+<div class="container">
+    <div class="card">
     <h2>{{title}}</h2>
+    <h5>Posted by {{user.username}} on {{format_date createdAt}}</h5>
+    <br>
+    
     <p>{{body}}</p>
-    <p>Posted by {{user.username}}</p>
-    <p>Posted on {{format_date createdAt}}</p>
+    
+    </div>
 </div>

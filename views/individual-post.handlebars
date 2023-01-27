@@ -1,0 +1,27 @@
+
+{{!-- display blog post info --}}
+{{> post}}
+{{!-- display comment form and already posted comments ONLY if logged in --}}
+{{#if logged_in}}
+<div class="card">
+    <h2 class="card-header">Add a Comment</h2>
+    <div class="card-body">
+        <form class="form comment-form">
+            <div class="form-group">
+                <input class="form-control" placeholder="Add a comment..." type="text" id="comment-content" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Add comment</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{/if}}
+{{!-- display already posted comments --}}
+{{> comments}}
+
+</div>
+
+{{#if logged_in}}
+<script src="/js/comment.js"></script>
+{{/if}}
