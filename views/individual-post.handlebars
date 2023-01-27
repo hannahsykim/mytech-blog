@@ -2,7 +2,7 @@
 {{!-- display blog post info --}}
 {{> post}}
 {{!-- display comment form and already posted comments ONLY if logged in --}}
-{{#if logged_in}}
+{{#if loggedIn}}
 <div class="card">
     <h2 class="card-header">Add a Comment</h2>
     <div class="card-body">
@@ -22,6 +22,6 @@
 
 </div>
 
-{{#if logged_in}}
+{{#if loggedIn}}
 <script src="/js/comment.js"></script>
 {{/if}}
