@@ -7,7 +7,7 @@ const withAuth = require('../../utils/auth');
 // This should be a protected route, so you'll need to use the withAuth middleware
 router.post("/", withAuth, async (req, res) => {
     try {
-        Post.create(
+        const postData = await Post.create(
             {
                 title: req.body.title,
                 body: req.body.body,
@@ -15,7 +15,7 @@ router.post("/", withAuth, async (req, res) => {
             }
         );
     
-        res.redirect("/dashboard");
+        res.status(200).json(postData);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -25,7 +25,7 @@ router.post("/", withAuth, async (req, res) => {
 // This should be a protected route, so you'll need to use the withAuth middleware
 router.put("/:id", withAuth, async (req, res) => {
     try {
-        Post.update(
+        const onePostData = await Post.update(
             {
                 title: req.body.title,
                 body: req.body.body,
@@ -36,8 +36,11 @@ router.put("/:id", withAuth, async (req, res) => {
                 },
             }
         );
-
-        res.redirect("/dashboard");
+        if (!onePostData) {
+            res.status(404).json({ message: "No post found with this id!" });
+            return;
+        }
+        res.status(200).json(onePostData);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -49,7 +52,7 @@ router.put("/:id", withAuth, async (req, res) => {
 // This should be a protected route, so you'll need to use the withAuth middleware
 router.delete("/:id", withAuth, async (req, res) => {
     try {
-        Post.destroy(
+        const postData = await Post.destroy(
             {
                 where: {
                     id: req.params.id,
@@ -57,7 +60,11 @@ router.delete("/:id", withAuth, async (req, res) => {
             }
         );
         
-        res.redirect("/dashboard");
+        if (!postData) {
+            res.status(404).json({ message: "No post found with this id!" });
+            return;
+        }
+        res.status(200).json({ message: `Post ${req.params.id} deleted`, postData });
     } catch (err) {
         res.status(500).json(err);
     }
