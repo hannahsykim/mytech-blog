@@ -5,4 +5,5 @@ module.exports = {
       return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
     }
     //add additional custom helpers here if needed
+    
   };

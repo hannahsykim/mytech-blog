@@ -20,6 +20,7 @@ router.get("/", async (req, res) => {
 // this page can be viewed without logging in
 router.get('/post/:id', async (req, res) => {
   try {
+    
     const singlePost = await Post.findByPk(req.params.id, {
       include: [
         {
@@ -34,7 +35,6 @@ router.get('/post/:id', async (req, res) => {
     
     const singlePostData = singlePost.get({ plain: true });
 
-    res.status(200).json(singlePostData);
     res.render("individual-post", { singlePostData });
   } catch (err) {
     res.status(500).json(err);

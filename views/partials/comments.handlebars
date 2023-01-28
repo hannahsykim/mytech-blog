@@ -1,12 +1,14 @@
-{{#each comments as |comment|}}
-<div class="card">
-    <header class="card-header">
-        <p class="card-header-title">
-            {{comment.comment}}
-        </p>
-    </header>
-    <div class="card-body">
-        <div class="body">
-            <p>Posted by {{comment.user.username}} on {{format_date comment.createdAt}}</p>
+<div class="container">
+    <div class="card px-5 py-4 my-2">
+        <div class="card-title m-2">
+            <h5>Comment by {{user.username}} on {{createdAt}}</h5>
         </div>
+        <div class="card-text m-2">
+            <p>
+                {{body}}
+            </p>
+        </div>
+    </div>
 </div>
+
+

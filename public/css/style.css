@@ -53,6 +53,12 @@
     justify-content: center;
   }
 
+  #title {
+    color: black; !important;
+    text-decoration: none;
+    
+  }
+
   #btn:hover {
     opacity: 0.8;
   }
@@ -82,7 +88,7 @@
   
   /* Add a card effect for articles */
   .card {
-    background-color: gray;
+    background-color: white;
     padding: 20px;
     margin-top: 20px;
   }

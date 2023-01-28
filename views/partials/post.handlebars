@@ -1,11 +1,11 @@
 <div class="container">
     <div class="card">
-        <a href="/post/{{id}}">{{title}}</a>
+        <a href="/post/{{id}}" id="title">{{title}}</a>
         <h5>Posted by {{user.username}} on {{createdAt}}</h5>
         <br>
         
         <p>{{body}}</p>
-
+        
         <button type="button" class="btn btn-primary">
             <a href="/post/{{id}}">
             <i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit
@@ -15,6 +15,6 @@
             <a href="/post/{{id}}">
             <i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete
             </a>
-        
+        </button>
     </div>
 </div>

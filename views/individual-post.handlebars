@@ -1,16 +1,18 @@
-{{#each posts as | userPost | }}
-    {{> post this}}
-    {{> comment this}}
-{{/each}}
-
 {{!-- display comment form and already posted comments ONLY if logged in --}}
-{{#if loggedIn}}
+
+<div class="row">
+    <div class="column">
+       {{> post this}}
+    </div>
+</div>
+
 <div class="card">
+    {{> comments this}}
     <h2 class="card-header">Add a Comment</h2>
     <div class="card-body">
         <form class="form comment-form">
             <div class="form-group">
-                <input class="form-control" placeholder="Add a comment..." type="text" id="comment-content" />
+                <input class="form-control" placeholder="Add a comment..." type="text" id="comment-input"/>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">Add comment</button>
@@ -18,12 +20,10 @@
         </form>
     </div>
 </div>
-{{/if}}
+
 {{!-- display already posted comments --}}
 
 
 </div>
 
-{{#if loggedIn}}
 <script src="/js/comment.js"></script>
-{{/if}}
