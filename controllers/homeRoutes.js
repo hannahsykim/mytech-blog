@@ -16,31 +16,6 @@ router.get("/", async (req, res) => {
   res.render("homepage", { username });
 });
 
-// TODO - create a GET route for getting a single post with its id
-// this page can be viewed without logging in
-router.get('/post/:id', async (req, res) => {
-  try {
-    
-    const singlePost = await Post.findByPk(req.params.id, {
-      include: [
-        {
-          model: Comment
-        },
-        {
-          model: User,
-          attributes: ['username']
-        }
-      ]
-    });
-    
-    const singlePostData = singlePost.get({ plain: true });
-
-    res.render("individual-post", { singlePostData });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 // This route renders the login page, which has been completed for you
 router.get("/login", (req, res) => {
   //if users has an existing valid session, they will be redirected to the homepage
