@@ -1,4 +1,6 @@
+
 const commentFormHandler = async (event) => {
+
     event.preventDefault();
   
     const commentArea = document.querySelector("#comment-input").value.trim();
@@ -7,7 +9,6 @@ const commentFormHandler = async (event) => {
       window.location.toString().split("/").length - 1
     ];
   
-    //   if (content) prevents users from submitting empty comments
     if (commentArea) {
       const response = await fetch("/api/comments", {
         method: "POST",
@@ -17,12 +18,14 @@ const commentFormHandler = async (event) => {
   
       if (response.ok) {
         document.location.reload();
+        console.log("Comment posted");
       } else {
-        alert(response.statusText);
+        alert("Failed to post comment");
+        console.log("Comment failed to post");
       }
     }
   };
   
   document
-    .querySelector(".btn")
+    .querySelector(".comment-btn")
     .addEventListener("submit", commentFormHandler);

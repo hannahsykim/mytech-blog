@@ -17,11 +17,14 @@ router.post("/", withAuth, async (req, res) => {
   try {
     const commentData = await Comment.create(
       {
-        body: req.body.comment,
+        body: req.body.body,
         userId: req.session.userId,
         postId: req.body.postId,
+        createdAt: req.body.createdAt,
+        updatedAt: req.body.updatedAt,
       });
-    res.status(200).json(commentData);
+    res.render('comment', { layout: "dashboard", commentData });
+    console.log('Comment created');
   } catch (err) {
     res.status(500).json(err);
   }

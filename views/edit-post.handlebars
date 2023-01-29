@@ -1,7 +1,7 @@
 <div class="card">
     <header class="card-header">Edit a Blog Post</header>
     <div class="card-body">
-        <form class="form" id="edit-blog">
+        <form class="form" id="edit-post" method="POST" action="/dashboard/edit">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input class="form-control" type="text" id="new-title" placeholder="New Title" />
@@ -10,10 +10,10 @@
                 <label for="body">Body</label>
                 <textarea class="form-control" name="body" id="new-body" placeholder="New Body"</textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Update Post</button>
-            <button type="button" class="btn btn-danger">Delete Post</button>
+            <button type="submit" class="btn btn-primary submit-btn" value="{{post.id}}">Update Post</button>
+            <button type="button" class="btn btn-danger delete-btn" value="{{post.id}}">Delete Post</button>
     </div>
 </div>
 
-<script src="/js/edit-blog.js"></script>
-<script src="/js/delete-blog.js"></script>
+<script src="/js/edit.js"></script>
+<script src="/js/delete.js"></script>

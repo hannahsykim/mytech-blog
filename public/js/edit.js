@@ -1,20 +1,23 @@
+const editBtn = document.querySelector(".edit-btn");
+const editPost = document.querySelector(".edit-post");
+
 const editFormHandler = async (event) => {
-    try {
-      event.preventDefault();
+    
+      //event.preventDefault();
   
       // grab the values of the title and content from input fields
-      const title = document.querySelector("#new-blog-title").value.trim();
-      const content = document.querySelector("#blog-content").value.trim();
-  
+      const title = document.querySelector("#title").value.trim();
+      const body = document.querySelector("#body").value.trim();
       // grab the value of the blog_id from the button href
-      const id = document.querySelector(".submit-blog-btn").getAttribute("value");
-  
-      const response = await fetch(`/api/blogs/${id}`, {
+      const id = document.querySelector(".submit-btn").getAttribute("value");
+  if (title && body) {
+      try {
+      const response = await fetch(`/post`, {
         method: "PUT",
         body: JSON.stringify({
-          blog_id: id,
-          title,
-          content,
+          post_id: id,
+          title: title,
+          body: body,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -22,14 +25,18 @@ const editFormHandler = async (event) => {
       });
   
       if (response.ok) {
-        document.location.replace("/dashboard");
+        document.location.reload("/dashboard");
       }
     } catch (err) {
       console.log(err);
-      alert(response.statusText);
+     
     }
   };
-  
-  document
-    .querySelector(".submit-blog-btn")
-    .addEventListener("click", editFormHandler);
+};  
+
+  if (editBtn) {
+    const post_id = editBtn.dataset.id;
+    editBtn.addEventListener("click", () => {
+        editFormHandler(post_id);
+        });
+    }; 

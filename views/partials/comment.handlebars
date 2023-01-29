@@ -1,14 +1,13 @@
-<div class="container">
+
+<div class="container comment">
     <div class="card px-5 py-4 my-2">
         <div class="card-title m-2">
             <h5>Comment by {{user.username}} on {{createdAt}}</h5>
         </div>
         <div class="card-text m-2">
-            <p>
+            <a href="/post/{{post.id}}">
                 {{body}}
-            </p>
+            </a>
         </div>
     </div>
 </div>
-
-

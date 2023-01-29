@@ -13,7 +13,7 @@ Comment.init(
   {
     sequelize,
     freezeTableName: true,
-    modelName: 'comment'
+    modelName: 'comments'
   }
 );
 

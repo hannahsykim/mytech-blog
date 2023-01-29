@@ -1,14 +1,16 @@
+// grab the value of the blog_id from the button href
+const deleteBtn = document.querySelector(".delete-btn")
+const deletePost = document.querySelector(".delete-post")
+
 const deleteFormHandler = async (event) => {
     try {
-      event.preventDefault();
-  
-      // grab the value of the blog_id from the button href
-      const id = document.querySelector(".delete-blog-btn").getAttribute("value");
-  
-      const response = await fetch(`/api/blogs/${id}`, {
+      //event.preventDefault();
+    
+      const post_id = document.querySelector(".delete-btn").getAttribute("value");
+      const response = await fetch(`/post/${id}`, {
         method: "DELETE",
         body: JSON.stringify({
-          blog_id: id,
+          post_id
         }),
         headers: {
           "Content-Type": "application/json",
@@ -20,10 +22,10 @@ const deleteFormHandler = async (event) => {
       }
     } catch (err) {
       console.log(err);
-      alert(response.statusText);
+      
     }
   };
   
   document
-    .querySelector(".delete-blog-btn")
+    .querySelector(".delete-btn")
     .addEventListener("click", deleteFormHandler);

@@ -4,7 +4,7 @@
 // All of these routes will be protected by the withAuth middleware function.
 
 const router = require("express").Router();
-const { Post, User } = require("../models/");
+const { Post, User, Comment } = require("../models/");
 const withAuth = require("../utils/auth");
 
 // TODO - create logic for the GET route for / that renders the dashboard homepage
@@ -48,6 +48,37 @@ router.post("/create", withAuth, async (req, res) => {
 
 // TODO - create logic for the GET route for /edit/:id that renders the edit post page
 // It should display a form for editing an existing post
+router.get('/edit/:id', withAuth, async (req, res) => {
+  try {
+    const editPost = await Post.findOne({
+      where: {
+        id: req.params.id,
+      }, 
+      attributes: ['id', 'title', 'body', 'createdAt'],
+
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'comment_text', 'post_id', 'user_id', 'createdAt'],
+          include: {
+            model: User,
+            attributes: ['username']
+          }
+
+        },
+        {
+          model: User,
+          attributes: ['username']
+        }
+      ]
+    });
+    const editPostData = editPost.get({ plain: true });
+    res.render("edit-post", { layout: "dashboard", editPostData, loggedIn: true });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 module.exports = router;
 
