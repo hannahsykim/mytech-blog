@@ -7,7 +7,7 @@ const deleteFormHandler = async (event) => {
       //event.preventDefault();
     
       const post_id = document.querySelector(".delete-btn").getAttribute("value");
-      const response = await fetch(`/post/${id}`, {
+      const response = await fetch(`/api/post/${id}`, {
         method: "DELETE",
         body: JSON.stringify({
           post_id

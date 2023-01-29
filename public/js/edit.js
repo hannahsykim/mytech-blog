@@ -12,7 +12,7 @@ const editFormHandler = async (event) => {
       const id = document.querySelector(".submit-btn").getAttribute("value");
   if (title && body) {
       try {
-      const response = await fetch(`/post`, {
+      const response = await fetch(`/api/post/${id}`, {
         method: "PUT",
         body: JSON.stringify({
           post_id: id,

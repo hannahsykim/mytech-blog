@@ -116,26 +116,62 @@
     display: inline-block;
   }
   
-  input {
-    width: 100%;
+  #comment-form {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    display: inline-block;
+  }
+  
+  #login-form, #username-input-login, #password-input-login, #login-btn {
     padding: 15px;
     margin: 5px 0 22px 0;
     border: none;
-    background: #f1f1f1;
+
   }
   
+  .comment-input {
+    display: inline;
+    padding: 2px;
+    margin: 6px 2px 0;
+    border: none;
+    background: #f1f1f1;
+    height: 100%;
+    text-align: left;
+
+  }
+
+
   button {
+    display: inline;
     background-color: #04AA6D;
     color: white;
-    padding: 14px 20px;
-    margin: 6px 2px 0;
+    padding: 15px;
     border: none;
     cursor: pointer;
     width: 100%;
-    ;
+    text-align: center;
+    margin: 6px 2px 0;
   }
   
   button:hover {
+    opacity: 0.8;
+  }
+
+  #comment-btn {
+    background-color: #04AA6D;
+    color: white;
+    display: inline;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  
+    justify-content: center;
+    height: auto;
+  }
+
+  #comment-btn:hover {
     opacity: 0.8;
   }
 
