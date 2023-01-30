@@ -3,11 +3,11 @@ const editPost = document.querySelector(".edit-post");
 
 const editFormHandler = async (event) => {
     
-      //event.preventDefault();
+      event.preventDefault();
   
       // grab the values of the title and content from input fields
-      const title = document.querySelector("#title").value.trim();
-      const body = document.querySelector("#body").value.trim();
+      const title = document.querySelector("#new-title").value.trim();
+      const body = document.querySelector("#new-body").value.trim();
       // grab the value of the blog_id from the button href
       const id = document.querySelector(".submit-btn").getAttribute("value");
   if (title && body) {

@@ -1,10 +1,22 @@
 
-    <div class="card">
-        <a href='/post/{{id}}' style="color: black;">{{title}}</a>
-        <h5>Posted by {{username}} on {{createdAt}}</h5>
+
+
+<div class="card entry">
+        <a href='/post/{{id}}' style="color: black;">hi {{ title }}</a>
+        <h5>Posted by {{username}} on {{ createdAt }}</h5>
         <br>
-        
+    <div class="body">
         <p>{{body}}</p>
-        
     </div>
+
+    <button type="button" class="btn btn-primary submit-btn">
+            <a href="/dashboard/edit/{{id}}">
+            <i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit
+            </a>
+        </button>
+        <button type="button" class="btn btn-danger delete-btn" value="{{post.id}}">
+            <i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete
+            </a>
+        </button>
+</div>
 
