@@ -32,6 +32,7 @@ router.get("/create", withAuth, async (req, res) => {
   res.render("admin-new-post", { layout: "dashboard" });
 });
 
+//post route for creating a new post
 router.post("/create", withAuth, async (req, res) => {
   try {
 
@@ -79,6 +80,173 @@ router.get('/edit/:id', withAuth, async (req, res) => {
   }
 });
 
+// // TODO - work on GET route for getting all posts
+// // this page can be viewed without logging in
+// router.get("/", async (req, res) => {
+//     // TODO - retrieve all posts from the database
+//     // render the homepage template with the posts retrieved from the database
+//     // refer to homepage.handlebars write the code to display the posts
+//     let username;
+//     if (req.session.loggedIn) {
+//       username = req.session.username;
+//     }
+//     res.render("homepage", { username });
+//   });
+
+// TODO - create a GET route for getting a single post with its id
+// router.get('/:id', withAuth, async (req, res) => {
+//     try {
+//     const singlePost = await Post.findByPk(req.params.id, {
+//     include: [
+//         {
+//         model: Comment,
+//         attributes: ['id', 'body', 'postId', 'userId', 'createdAt', 'updatedAt'],
+//         },
+//         {
+//         model: User,
+//         attributes: ['username']
+//         }
+//     ]
+//     });
+//     if (!singlePost) {
+//         res.status(404).json({ message: "No post found with this id" });
+//         return;
+//     }
+
+//     const singlePostData = singlePost.get({ plain: true });
+
+//     res.render("individual-post", {  layout: "dashboard", singlePostData});
+//     } catch (err) {
+//     res.status(500).json(err);
+//     }
+// });
+
+router.get("/:id", withAuth, async (req, res) => {
+  const postsData = await Post.findOne({ 
+    where: { id: req.params.id },
+    order: [["createdAt", "DESC"]],
+    include: [
+      {
+                model: Comment,
+                attributes: ['id', 'body', 'postId', 'userId', 'createdAt', 'updatedAt'],
+                },
+      {
+        model: User,
+        attributes: ["username"],
+      }
+    ] 
+  });
+  const posts = postsData.get({ plain: true });
+  console.log(posts);
+  res.render("individual-post", { posts });
+  // refer to admin-all-posts.handlebars write the code to display the posts
+});
+
+// // TODO - create a POST route for creating a new post
+// // This should be a protected route, so you'll need to use the withAuth middleware
+// router.post("/create", withAuth, async (req, res) => {
+//     try {
+//         const postData = await Post.create(
+//             {
+//                 title: req.body.title,
+//                 body: req.body.body,
+//                 userId: req.session.userId,
+//             }
+//         );
+    
+//         res.status(200).json(postData);
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
+
+
+// TODO - create a PUT route for updating a post's title or body
+// This should be a protected route, so you'll need to use the withAuth middleware
+router.put("/:id", withAuth, async (req, res) => {
+    try {
+        const onePostData = await Post.update(
+            {
+                title: req.body.title,
+                body: req.body.body,
+            },
+            {
+                where: {
+                    id: req.params.id,
+                },
+            }
+        );
+        if (!onePostData) {
+            res.status(404).json({ message: "No post found with this id!" });
+            return;
+        }
+        res.status(200).json(onePostData);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+
+// TODO - create a DELETE route for deleting a post with a specific id
+// This should be a protected route, so you'll need to use the withAuth middleware
+router.delete("/:id", withAuth, async (req, res) => {
+    try {
+        const postData = await Post.destroy(
+            {
+                where: {
+                    id: req.params.id,
+                },
+            }
+        );
+        
+        if (!postData) {
+            res.status(404).json({ message: "No post found with this id!" });
+            return;
+        }
+        res.status(200).json({ message: `Post ${req.params.id} deleted`, postData });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+
+//comment get route
+router.get('/comment', withAuth, async (req, res) => {
+  try {
+
+  const commentData = await Comment.findAll({
+      include: [{ model: User}],
+      where: { postId: req.params.id }
+      });
+  if (!commentData) {
+      res.status(404).json({ message: "No post found with this id" });
+      return;
+  }
+
+  const comments = commentData.map((commentData => commentData.get({ plain: true })));
+  res.render("individual-post", {comments});
+  } catch (err) {
+  res.status(500).json(err);
+  }
+});
+
+//comment post route
+router.post('/:id', withAuth, async (req, res) => {
+  try {
+      const comments = await Comment.create(
+          {
+              body: req.body.body,
+              postId: req.params.id,
+              userId: req.session.userId,
+          }
+      );
+          
+      res.status(200).json(comments);
+      res.render("individual-post", {comments});
+  } catch (err) {
+      res.status(500).json(err);
+  }
+});
 
 module.exports = router;
 

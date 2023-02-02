@@ -1,13 +1,12 @@
 
 {{! A boilerplate dashboard layout is completed for you, feel free to modify and style to your liking }}
-<!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Tech Blog</title>
-    <link rel="stylesheet" href="/css/style.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script> 
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
 
   <body>
@@ -15,16 +14,7 @@
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/dashboard">Dashboard</a></li>
-        {{!-- {{#if loggedIn}}
-        <li>loggout</li>
-        {{else}}
-        <li><a href="/login">Login</a></li>
-        {{/if}} --}}
-        {{#if loggedIn}}
-        <li><button id="logout" class="btn-no-style">Logout</button></li>
-        {{else}}
-        <li><a href="/login" class="btn btn-primary">Login</a></li>
-        {{/if}}
+        <li><a href="#" id="logout-link">Logout</a></li>
       </ul>
     </nav>
     <header>
@@ -34,11 +24,13 @@
     <main>
       {{{body}}}
     </main>
-
-    {{#if loggedIn}}
-      <script src="/js/logout.js">Logout</script>
-    {{/if}} 
-
   </body>
-
 </html>
+
+<script>
+  const logout = async function() { const response = await
+  fetch('/api/user/logout', { method: 'POST', headers: { 'Content-Type':
+  'application/json' }, }); if (response.ok) { document.location.replace('/'); }
+  else { alert('Failed to log out'); } };
+  document.querySelector('#logout-link').addEventListener('click', logout);
+</script>

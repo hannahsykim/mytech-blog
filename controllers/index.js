@@ -6,7 +6,7 @@ const router = require('express').Router();
 const apiRoutes = require('./api');
 const homeRoutes = require('./homeRoutes.js');
 const dashboardRoutes = require('./dashboardRoutes.js');
-const singlePostRoutes = require('./singlePost.js');
+
 
 //homeRoutes will have no prefix prepended to all routes
 router.use('/', homeRoutes);
@@ -14,8 +14,7 @@ router.use('/', homeRoutes);
 router.use('/dashboard', dashboardRoutes);
 //apiRoutes will have /api prepended to all routes
 router.use('/api', apiRoutes);
-//singlepostRoutes will have /post prepended to all routes
-router.use('/post', singlePostRoutes);
+
 
 module.exports = router;
 

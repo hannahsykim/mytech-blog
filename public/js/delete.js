@@ -1,3 +1,4 @@
+
 // grab the value of the blog_id from the button href
 const deleteBtn = document.querySelector(".delete-btn")
 const deletePost = document.querySelector(".delete-post")

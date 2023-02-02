@@ -106,6 +106,18 @@
     justify-content: center;
     align-items: center;
   } 
+  #edit-post {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    text-align: center;
+    
+  }
+
+  .text-header {
+    padding: 15px 0 15px 0;
+  }
 
 
   form {

@@ -2,11 +2,12 @@
 {{!-- TODO - write the template to show all posts on the / route --}}
 
 <h1>ALL POSTS</h1>
+{{#if username}}
+<p>Hello, {{username}}</p>
+{{/if}}
 
-{{#each posts as | userPost | }}
-{{> post this}}
-{{else}}
-<div class="p-2">
-    <h2>There are currently no posts</h2>
-</div>
+{{#each posts}}
+{{> post}}
 {{/each}}
+
+{{!-- TODO - write the template to show a single post on the /post/:id route --}}

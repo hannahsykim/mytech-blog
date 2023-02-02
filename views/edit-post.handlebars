@@ -1,19 +1,27 @@
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script> 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+
+
 <div class="card">
     <header class="card-header">Edit a Blog Post</header>
     <div class="card-body">
         <form class="form" id="edit-post">
             <div class="form-group">
-                <label for="title">Title</label>
-                <input class="form-control" type="text" id="new-title" placeholder="New Title" />
+                <label for="title" class="text-header">Title</label>
+                <br>
+                <input class="form-control" type="text" id="new-title" placeholder="New Title">
             </div>
+            
             <div class="form-group">
-                <label for="body">Body</label>
+                <label for="body" class="text-header">Body</label>
+                
                 <textarea class="form-control" name="body" id="new-body" placeholder="New Body"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary submit-btn" value="{{post.id}}">Update Post</button>
-            <button type="button" class="btn btn-danger delete-btn" value="{{post.id}}">Delete Post</button>
+            <button type="click" class="btn btn-primary submit-btn">Update Post</button>
+            <button type="button" class="btn btn-danger delete-btn">Delete Post</button>
     </div>
 </div>
 
-<script src="/js/edit.js"></script>
-<script src="/js/delete.js"></script>
+<script type="text/javascript" src="/js/edit.js"></script>
+<script type="text/javascript" src="/js/delete.js"></script>
+
