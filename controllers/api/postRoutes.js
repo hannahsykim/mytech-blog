@@ -51,7 +51,7 @@ router.post("/", withAuth, async (req, res) => {
 
 // TODO - create a PUT route for updating a post's title or body
 // This should be a protected route, so you'll need to use the withAuth middleware
-router.put("/edit/:id", withAuth, async (req, res) => {
+router.put("/:id", withAuth, async (req, res) => {
     try {
         const onePostData = await Post.update(
             {
@@ -97,61 +97,61 @@ router.delete("/:id", withAuth, async (req, res) => {
     }
 });
 
-// TODO - create a POST route for creating a new comment
-// This should be a protected route, so you'll need to use the withAuth middleware
-router.post("/comment/:id", withAuth, async (req, res) => {
-    try {
-      const commentData = await Comment.create(
-        {
-          body: req.body.body,
-          userId: req.session.userId,
-          postId: req.body.postId,
-        });
-      res.status(200).json(commentData);
-      console.log('Comment created');
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+// // TODO - create a POST route for creating a new comment
+// // This should be a protected route, so you'll need to use the withAuth middleware
+// router.post("/comment/:id", withAuth, async (req, res) => {
+//     try {
+//       const commentData = await Comment.create(
+//         {
+//           body: req.body.body,
+//           userId: req.session.userId,
+//           postId: req.body.postId,
+//         });
+//       res.status(200).json(commentData);
+//       console.log('Comment created');
+//     } catch (err) {
+//       res.status(500).json(err);
+//     }
+//   });
 
-  //get all comments
-router.get("/comment", withAuth, async (req, res) => {
-    try {
-        const comment = await Comment.findAll({
-            include: [
-                {
-                    model: User,
-                    attributes: ['username']
-                }
-            ]
-        });
-        res.json(comment);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
+//   //get all comments
+// router.get("/comment", withAuth, async (req, res) => {
+//     try {
+//         const comment = await Comment.findAll({
+//             include: [
+//                 {
+//                     model: User,
+//                     attributes: ['username']
+//                 }
+//             ]
+//         });
+//         res.json(comment);
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 
-// get singluar comment
-router.get("/comment/:id", withAuth, async (req, res) => {
-    try {
-        const comment = await Comment.findByPk(req.params.id, {
-            include: [
-                {
-                    model: User,
-                    attributes: ['username']
-                }
-            ]
-        });
-        if (!comment) {
-            res.status(404).json({ message: "No comment found with this id" });
-            return;
-        }
+// // get singluar comment
+// router.get("/comment/:id", withAuth, async (req, res) => {
+//     try {
+//         const comment = await Comment.findByPk(req.params.id, {
+//             include: [
+//                 {
+//                     model: User,
+//                     attributes: ['username']
+//                 }
+//             ]
+//         });
+//         if (!comment) {
+//             res.status(404).json({ message: "No comment found with this id" });
+//             return;
+//         }
 
-        res.json(comment);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
+//         res.json(comment);
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 
   
 module.exports = router;

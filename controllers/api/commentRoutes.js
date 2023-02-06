@@ -5,14 +5,7 @@ const withAuth = require('../../utils/auth');
   //get all comments
 router.get("/", withAuth, async (req, res) => {
     try {
-        const comments = await Comment.findAll({
-            include: [
-                {
-                    model: User,
-                    attributes: ['username']
-                }
-            ]
-        });
+        const comments = await Comment.findAll();
         res.status(200).json(comments);
     } catch (err) {
         res.status(500).json(err);
@@ -25,8 +18,8 @@ router.get("/:id", withAuth, async (req, res) => {
         const comments = await Comment.findByPk(req.params.id, {
             include: [
                 {
-                    model: User,
-                    attributes: ['username']
+                model: User,
+                attributes: ['username']
                 }
             ]
         });
@@ -37,7 +30,7 @@ router.get("/:id", withAuth, async (req, res) => {
 
         res.status(200).json(comments);
     } catch (err) {
-        res.status(500).json(err);
+    res.status(500).json(err);
     }
 });
 
@@ -46,18 +39,20 @@ router.get("/:id", withAuth, async (req, res) => {
 router.post("/", withAuth, async (req, res) => {
     try {
       const comments = await Comment.create(
-        {
+        { 
             body: req.body.body,
             userId: req.session.userId,
             postId: req.body.postId,
-        }   
-        );
-      res.status(200).json(comments);
-      //console.log('Comment created');
+        });
+        res.status(200).json(comments);
+        console.log('Comment created');
+        
     } catch (err) {
-      res.status(500).json(err);
+        res.status(500).json(err);
     }
-  });
+});
+
+
 
 //put update
 // router.put("/:id", withAuth, async (req, res) => {

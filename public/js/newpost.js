@@ -11,7 +11,7 @@ document.querySelector('#new-post').addEventListener("submit", async (event) => 
         })
     });
 
-    console.log(response);
+    //console.log(response);
     
         if (response.ok) {
             document.location.replace('/dashboard');

@@ -1,9 +1,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script> 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 
- 
-<div class="card entry">
+
+<div class="card">
         <a href='/dashboard/{{id}}' style="color: black;"> {{posts.title}}</a>
         <h5>Posted by {{posts.user.username}} on {{ posts.createdAt }}</h5>
         <br>
@@ -12,7 +10,7 @@
     </div>
 
     <button type="button" class="btn btn-primary submit-btn">
-            <a href="/dashboard/edit/{{id}}">
+            <a href="/dashboard/edit/{{post.id}}">
             <i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit
             </a>
         </button>
@@ -25,9 +23,7 @@
 
 
 {{!-- post template --}}
-
-<div class="card">
-    
+<div class="card"> 
 <div class="container comment">
     <div class="card px-5 py-4 my-2">
         <span class="card-title">{{comments.body}} <span id="postId">{{id}}</span></span>
@@ -38,12 +34,11 @@
     <h2 class="card-header">Add a Comment</h2>
     <div class="card-body">
         <form class="form comment-form" id="comment-form" style="display: flex;">
-            <div>
+            
                 <input class="form-control comment-input" placeholder="Add a comment..." type="text"/>
-            </div>
-            <div>
+            
                 <button class="comment-btn btn-primary" type="submit">Add comment</button>
-            </div>
+            
         </form>
     </div>
 </div>
@@ -53,4 +48,4 @@
 
 </div>
 
-<script src="/js/comment.js"></script>
+<script type="text/javascript   " src="/js/comment.js"></script>

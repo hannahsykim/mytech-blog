@@ -11,7 +11,7 @@ const deleteFormHandler = async (event) => {
       const response = await fetch(`/api/post/${id}`, {
         method: "DELETE",
         body: JSON.stringify({
-          post_id
+          postId: post_id,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -22,7 +22,7 @@ const deleteFormHandler = async (event) => {
         document.location.replace("/dashboard");
       }
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       
     }
   };

@@ -3,9 +3,8 @@ const editFormHandler = async (event) => {
       event.preventDefault();
   
       // grab the values of the title and content from input fields
-      const title = document.querySelector("#new-title").value.trim();
-      const body = document.querySelector("#new-body").value.trim();
-      // grab the value of the blog_id from the button href
+      const title = document.querySelector("#new-title").value
+      const body = document.querySelector("#new-body").value
       const id = document.querySelector(".submit-btn").getAttribute("value");
   if (title && body) {
       try {
@@ -25,7 +24,7 @@ const editFormHandler = async (event) => {
         document.location.reload('/dashboard');
       }
     } catch (err) {
-      console.log(err);
+      //console.log(err);
 
     }
   };
