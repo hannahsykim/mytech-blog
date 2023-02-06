@@ -20,7 +20,7 @@ router.get('/:id', withAuth, async (req, res) => {
     ]
     });
     if (!singlePost) {
-        res.status(404).json({ message: "No post found with this id" });
+        res.status(404).json({ message: "No single post found with this id" });
         return;
     }
 
@@ -32,7 +32,7 @@ router.get('/:id', withAuth, async (req, res) => {
 
 // TODO - create a POST route for creating a new post
 // This should be a protected route, so you'll need to use the withAuth middleware
-router.post("/", withAuth, async (req, res) => {
+router.post("/create", withAuth, async (req, res) => {
     try {
         const postData = await Post.create(
             {
@@ -65,7 +65,7 @@ router.put("/:id", withAuth, async (req, res) => {
             }
         );
         if (!onePostData) {
-            res.status(404).json({ message: "No post found with this id!" });
+            res.status(404).json({ message: "No post updated with this id!" });
             return;
         }
         res.status(200).json(onePostData);
@@ -88,7 +88,7 @@ router.delete("/:id", withAuth, async (req, res) => {
         );
         
         if (!postData) {
-            res.status(404).json({ message: "No post found with this id!" });
+            res.status(404).json({ message: "No post deleted with this id!" });
             return;
         }
         res.status(200).json({ message: `Post ${req.params.id} deleted`, postData });
@@ -131,7 +131,7 @@ router.delete("/:id", withAuth, async (req, res) => {
 //     }
 // });
 
-// // get singluar comment
+// // get singular comment
 // router.get("/comment/:id", withAuth, async (req, res) => {
 //     try {
 //         const comment = await Comment.findByPk(req.params.id, {

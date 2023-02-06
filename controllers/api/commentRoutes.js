@@ -1,12 +1,46 @@
 const router = require('express').Router();
+const { where } = require('sequelize');
 const { Post, Comment, User } = require('../../models/');
 const withAuth = require('../../utils/auth');
 
   //get all comments
 router.get("/", withAuth, async (req, res) => {
     try {
-        const comments = await Comment.findAll();
+        const commentData = await Comment.findAll({
+            include: [
+                {
+                model: User,
+                attributes: ['username']
+                }
+            ],
+        where: {id: req.params.id}
+        });
+
+    if (!commentData) {
+        res.status(404).json({ message: "No comment found with this id" });
+        return;
+    }
+    const comments = commentData.map((commentData) => commentData.get({ plain: true }));
+    res.status(200).json(comments);
+    console.log(comments);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// TODO - create a POST route for creating a new comment
+// This should be a protected route, so you'll need to use the withAuth middleware
+router.post("/:id", withAuth, async (req, res) => {
+    try {
+    const comments = await Comment.create(
+        { 
+            body: req.body.body,
+            userId: req.session.userId,
+            postId: req.body.postId,
+        });
         res.status(200).json(comments);
+        console.log('Comment created');
+
     } catch (err) {
         res.status(500).json(err);
     }
@@ -34,23 +68,7 @@ router.get("/:id", withAuth, async (req, res) => {
     }
 });
 
-// TODO - create a POST route for creating a new comment
-// This should be a protected route, so you'll need to use the withAuth middleware
-router.post("/", withAuth, async (req, res) => {
-    try {
-      const comments = await Comment.create(
-        { 
-            body: req.body.body,
-            userId: req.session.userId,
-            postId: req.body.postId,
-        });
-        res.status(200).json(comments);
-        console.log('Comment created');
-        
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
+
 
 
 

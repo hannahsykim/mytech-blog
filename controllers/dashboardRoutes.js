@@ -28,6 +28,27 @@ router.get("/", withAuth, async (req, res) => {
   // refer to admin-all-posts.handlebars write the code to display the posts
 });
 
+// TODO - create logic for the GET route for /new that renders the new post page
+// It should display a form for creating a new post
+router.get("/create", withAuth, async (req, res) => {
+  res.render("admin-new-post", { layout: "dashboard" });
+});
+
+//post route for creating a new post
+router.post("/create", withAuth, async (req, res) => {
+  try {
+
+    await Post.create({
+      title: req.body.title,
+      body: req.body.body,
+      userId: req.session.userId,
+    })
+    res.redirect("/dashboard");
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
+
 router.get("/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
@@ -60,26 +81,6 @@ router.get("/:id", withAuth, async (req, res) => {
         }
       });
 
-// TODO - create logic for the GET route for /new that renders the new post page
-// It should display a form for creating a new post
-router.get("/create", withAuth, async (req, res) => {
-  res.render("admin-new-post", { layout: "dashboard" });
-});
-
-//post route for creating a new post
-router.post("/create", withAuth, async (req, res) => {
-  try {
-
-    await Post.create({
-      title: req.body.title,
-      body: req.body.body,
-      userId: req.session.userId,
-    })
-    res.redirect("/dashboard");
-    } catch (err) {
-      res.status(500).json(err);
-    }
-});
 
 // TODO - create logic for the GET route for /edit/:id that renders the edit post page
 // It should display a form for editing an existing post
@@ -241,7 +242,7 @@ router.get('/', withAuth, async (req, res) => {
       where: { id: req.params.id }
       });
   if (!commentData) {
-      res.status(404).json({ message: "No post found with this id" });
+      res.status(404).json({ message: "No comment found with this id" });
       return;
   }
 
@@ -254,9 +255,14 @@ router.get('/', withAuth, async (req, res) => {
 });
 
 //comment post route
-router.post('/', withAuth, async (req, res) => {
+router.post('/:id', withAuth, async (req, res) => {
   try {
-
+    const comments = await Comment.create(
+      { 
+          body: req.body.body,
+          userId: req.session.userId,
+          postId: req.body.postId,
+      });
       res.render("admin-single-post", { comments, loggedIn: true });
   } catch (err) {
       res.status(500).json(err);

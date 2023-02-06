@@ -1,17 +1,13 @@
-
-// grab the value of the blog_id from the button href
-const deleteBtn = document.querySelector(".delete-btn")
-const deletePost = document.querySelector(".delete-post")
-
-const deleteFormHandler = async (event) => {
+var deleteFormHandler = async (event) => {
     try {
-      //event.preventDefault();
+      event.preventDefault();
     
       const post_id = document.querySelector(".delete-btn").getAttribute("value");
-      const response = await fetch(`/api/post/${id}`, {
+
+      const response = await fetch(`/api/post/${post_id}`, {
         method: "DELETE",
         body: JSON.stringify({
-          postId: post_id,
+          postId: post_id
         }),
         headers: {
           "Content-Type": "application/json",
@@ -22,7 +18,7 @@ const deleteFormHandler = async (event) => {
         document.location.replace("/dashboard");
       }
     } catch (err) {
-      //console.log(err);
+      console.log(err);
       
     }
   };
