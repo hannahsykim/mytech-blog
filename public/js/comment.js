@@ -13,7 +13,7 @@ var commentFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/dashboard');
+      document.location.replace(`/dashboard/${post_id}`);
     } else {
       alert('Failed to create comment');
     }
