@@ -3,7 +3,8 @@
 
 <div class="card">
         <a href='/dashboard/{{id}}' style="color: black;"> {{post.title}}</a>
-        <h5>Posted by {{post.user.username}} on {{ post.createdAt }}</h5>
+        <h5>Posted by {{post.user.username}} on {{format_date post.createdAt}}</h5>
+        
         <br>
     <div class="body">
         <p>{{post.body}}</p>
@@ -23,18 +24,23 @@
 
 
 {{!-- post template --}}
-<div class="comments"> 
-<div class="container comment">
+{{#each post.comments as | comment | }}
+<div class="container">
     <div class="card px-5 py-4 my-2">
-        
-        <div class="card-title">{{comments.body}} </div>
-            <h5>Comment by {{comments.user.username}}</h5>
+            <div class="body">
+                {{comment.body}}
+            </div>
+            <h5>Comment by {{comment.user.username}} on {{format_date comment.createdAt}} </h5>
     </div>
 </div>
+{{/each}}
 
-    <h2 class="card-header">Add a Comment</h2>
-    <div class="card-body">
-        <form class="form comment-form" id="comment-form" style="display: flex;">
+
+<div class="card-body">
+    
+        <form class="form comment-form" id="comment-form" style="display: block;">
+            <h3>Add a Comment</h3>
+            <br>
             <div class="form-group">
                 <input class="form control" id="textArea" placeholder="Add a comment..." type="text">
             </div>
@@ -42,8 +48,6 @@
                 <button class="comment-btn btn-primary" type="submit" value="{{post.id}}">Add comment</button>
             </div>
         </form>
-    </div>
-    
 </div>
 
 <script type="text/javascript" src="/js/comment.js"></script>

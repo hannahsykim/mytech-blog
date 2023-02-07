@@ -8,7 +8,7 @@ const sequelize = require('./config');
 const routes = require('./controllers');
 
 
-const hbs = exphbs.create({});
+
 const { User, Post, Comment } = require("./models");
 
 
@@ -37,6 +37,9 @@ const sess = {
 //apply session middleware
 app.use(session(sess));
 
+const hbs = exphbs.create({
+  helpers,
+});
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.use(express.static("public"));

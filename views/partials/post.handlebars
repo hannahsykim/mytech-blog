@@ -3,7 +3,7 @@
 
 <div class="card entry">
         <a href='/dashboard/{{id}}' style="color: black;"> {{title}}</a>
-        <h5>Posted by {{username}} on {{ createdAt }}</h5>
+        <h5>Posted by {{username}} on {{ format_date createdAt }}</h5>
         <br>
     <div class="body">
         <p>{{body}}</p>

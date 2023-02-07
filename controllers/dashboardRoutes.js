@@ -59,7 +59,7 @@ router.get("/:id", withAuth, async (req, res) => {
           },
           {
             model: Comment,
-            attributes: ['body'],
+            attributes: ['body', 'userId', 'createdAt'],
             include: {
               model: User,
               attributes: ['username'],
@@ -111,65 +111,65 @@ router.get('/edit/:id', withAuth, async (req, res) => {
     });
     const editPostData = editPost.get({ plain: true });
     //console.log(editPostData);
-    res.render("edit-post", { editPostData }); 
+    res.render("edit-post", { layout: "dashboard", editPostData }); 
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-//comment get route
-router.get('/', withAuth, async (req, res) => {
-  try {
+// //comment get route
+// router.get('/', withAuth, async (req, res) => {
+//   try {
 
-  const commentData = await Comment.findAll({
-      include: [
-        { 
-          model: User,
-          attributes: ['username']
-        }
-      ],
-      userId: req.session.userId,
-      });
-  if (!commentData) {
-      res.status(404).json({ message: "No comment found with this id" });
-      return;
-  }
+//   const commentData = await Comment.findAll({
+//       include: [
+//         { 
+//           model: User,
+//           attributes: ['username']
+//         }
+//       ],
+//       userId: req.session.userId,
+//       });
+//   if (!commentData) {
+//       res.status(404).json({ message: "No comment found with this id" });
+//       return;
+//   }
 
-  const comments = commentData.map((commentData => commentData.get({ plain: true })));
-  res.render("admin-single-post", { comments });
-  console.log(comments);
-  } catch (err) {
-  res.status(500).json(err);
-  }
-});
+//   const comments = commentData.map((comments => comments.get({ plain: true })));
+//   res.render("admin-single-post", { comments });
+  
+//   } catch (err) {
+//   res.status(500).json(err);
+//   }
+// });
 
-//comment single get route
-router.get('/:id', withAuth, async (req, res) => {
-  try {
-  const singleComment = await Comment.findByPk(req.params.id, {
-  include: [
-      {
-      model: User,
-      attributes: ['username']
-      },
+// //comment single get route
+// router.get('/:id', withAuth, async (req, res) => {
+//   try {
+//   const singleComment = await Comment.findByPk(req.params.id, {
+//   include: [
+//       {
+//       model: User,
+//       attributes: ['username']
+//       },
       
-  ]
-  });
-  if (!singleComment) {
-      res.status(404).json({ message: "No comment found with this id" });
-      return;
-  }
+//   ]
+//   });
+//   if (!singleComment) {
+//       res.status(404).json({ message: "No comment found with this id" });
+//       return;
+//   }
 
-  const comments = singleComment.get({ plain: true });
+//   const comment = singleComment.get({ plain: true });
 
-  res.render("admin-single-post", { comments });
-  } catch (err) {
-  res.status(500).json(err);
-  }
-});
+//   res.render("admin-single-post", { layout: "admin-single-post", comment });
+//   } catch (err) {
+//   res.status(500).json(err);
+//   }
+// });
 
 
-// // comment post route
+// comment post route
 // router.post('/:id', withAuth, async (req, res) => {
 //   try {
 //     const comments = await Comment.create(
@@ -178,7 +178,7 @@ router.get('/:id', withAuth, async (req, res) => {
 //           userId: req.session.userId,
 //           postId: req.body.postId,
 //       });
-//       res.redirect("admin-single-post", { comments });
+//       res.render("admin-single-post", { comments });
 //   } catch (err) {
 //       res.status(500).json(err);
 //   }
