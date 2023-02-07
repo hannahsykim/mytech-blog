@@ -2,13 +2,14 @@
 
 
 <div class="card">
-        <a href='/dashboard/{{id}}' style="color: black;"> {{post.title}}</a>
-        <h5>Posted by {{post.user.username}} on {{format_date post.createdAt}}</h5>
-        
+        <a href='/dashboard/{{id}}' style="color: black; font-size: 20pt"> {{post.title}}</a>
         <br>
     <div class="body">
         <p>{{post.body}}</p>
+        <br>
+        <h5 style="text-align: right">Posted by {{post.user.username}} on {{format_date post.createdAt}}</h5>
     </div>
+
 
     <button type="button" class="btn btn-primary submit-btn">
             <a href="/dashboard/edit/{{post.id}}">
@@ -30,7 +31,7 @@
             <div class="body">
                 {{comment.body}}
             </div>
-            <h5>Comment by {{comment.user.username}} on {{format_date comment.createdAt}} </h5>
+            <h5 style="text-align: right">Comment by {{comment.user.username}} on {{format_date comment.createdAt}} </h5>
     </div>
 </div>
 {{/each}}
