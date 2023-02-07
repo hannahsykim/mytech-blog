@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "dev": "node --watch server.js"
-        
+        "start": "node server.js"
+    
     },
     "dependencies": {
         "bcrypt": "^5.1.0",
