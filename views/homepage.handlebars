@@ -4,10 +4,17 @@
 <h1>ALL POSTS</h1>
 {{#if username}}
 <p>Hello, {{username}}</p>
+
 {{/if}}
 
-{{#each posts}}
-{{> posts}}
-{{/each}}
+<div class ="row">
+    <div class ="column">
+       
+        {{#each posts as | userPost | }}
+        {{> post this}}
+        {{/each}}
+    </div>
+    
+</div>
 
 {{!-- TODO - write the template to show a single post on the /post/:id route --}}
