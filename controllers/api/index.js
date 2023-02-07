@@ -11,6 +11,6 @@ router.use('/user', userRoutes);
 //postRoutes will have /post prepended to all routes
 router.use('/post', postRoutes);
 //commentRoutes will have /comment prepended to all routes
-router.use('/comment', commentRoutes);
+router.use('/comments', commentRoutes);
 
 module.exports = router;

@@ -246,28 +246,28 @@ router.get('/', withAuth, async (req, res) => {
       return;
   }
 
-  const comments = commentData.map((commentData => commentData.get({ plain: true })));
-  res.render("admin-single-post", { comments, loggedIn: true });
-  console.log(comments);
+  const comment = commentData.map((commentData => commentData.get({ plain: true })));
+  res.render("admin-single-post", { comment });
+  console.log(comment);
   } catch (err) {
   res.status(500).json(err);
   }
 });
 
 //comment post route
-router.post('/:id', withAuth, async (req, res) => {
-  try {
-    const comments = await Comment.create(
-      { 
-          body: req.body.body,
-          userId: req.session.userId,
-          postId: req.body.postId,
-      });
-      res.render("admin-single-post", { comments, loggedIn: true });
-  } catch (err) {
-      res.status(500).json(err);
-  }
-});
+// router.post('/:id', withAuth, async (req, res) => {
+//   try {
+//     const comment = await Comment.create(
+//       { 
+//           body: req.body.body,
+//           userId: req.session.userId,
+//           postId: req.body.postId,
+//       });
+//       res.render("admin-single-post", { comment, loggedIn: true });
+//   } catch (err) {
+//       res.status(500).json(err);
+//   }
+// });
 
 module.exports = router;
 

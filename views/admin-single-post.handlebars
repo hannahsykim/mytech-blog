@@ -2,11 +2,11 @@
 
 
 <div class="card">
-        <a href='/dashboard/{{id}}' style="color: black;"> {{posts.title}}</a>
-        <h5>Posted by {{posts.user.username}} on {{ posts.createdAt }}</h5>
+        <a href='/dashboard/{{id}}' style="color: black;"> {{post.title}}</a>
+        <h5>Posted by {{post.user.username}} on {{ post.createdAt }}</h5>
         <br>
     <div class="body">
-        <p>{{posts.body}}</p>
+        <p>{{post.body}}</p>
     </div>
 
     {{!-- <button type="button" class="btn btn-primary submit-btn">
@@ -23,29 +23,28 @@
 
 
 {{!-- post template --}}
-<div class="card"> 
+<div class="comments"> 
 <div class="container comment">
     <div class="card px-5 py-4 my-2">
-        <span class="card-title">{{comments.body}} <span id="postId">{{id}}</span></span>
-            <h5>Comment by {{comments.user.username}} on {{comments.createdAt}}</h5>
+        
+        <div class="card-title">{{comment.body}} </div>
+            <h5>Comment by {{comment.user.username}}</h5>
+        
     </div>
 </div>
 
     <h2 class="card-header">Add a Comment</h2>
     <div class="card-body">
         <form class="form comment-form" id="comment-form" style="display: flex;">
-            
-                <input class="form-control comment-input" placeholder="Add a comment..." type="text"/>
-            
-                <button class="comment-btn btn-primary" type="submit">Add comment</button>
-            
+            <div class="form-group">
+                <input class="form control" id="textArea" placeholder="Add a comment..." type="text">
+            </div>
+            <div class="form-group">
+                <button class="comment-btn btn-primary" type="submit" value="{{post.id}}">Add comment</button>
+            </div>
         </form>
     </div>
-</div>
-
-{{!-- display already posted comments --}}
-
-
+    
 </div>
 
 <script type="text/javascript" src="/js/comment.js"></script>

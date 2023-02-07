@@ -1,4 +1,3 @@
-
 const router = require('express').Router();
 const { Post, Comment, User } = require('../../models/');
 const withAuth = require('../../utils/auth');
@@ -7,17 +6,23 @@ const withAuth = require('../../utils/auth');
 // TODO - create a GET route for getting a single post with its id
 router.get('/:id', withAuth, async (req, res) => {
     try {
-    const singlePost = await Post.findByPk(req.params.id, {
-    include: [
-        {
-        model: Comment,
-        attributes: ['id', 'body', 'postId', 'userId', 'createdAt', 'updatedAt'],
+    const singlePost = await Post.findOne(
+    {
+        where: {
+            id: req.params.id
         },
-        {
-        model: User,
-        attributes: ['username']
-        }
-    ]
+    }, 
+    {
+        include: [
+            {
+            model: Comment,
+            attributes: ['body', 'postId'],
+            },
+            {
+            model: User,
+            attributes: ['username']
+            }
+        ]
     });
     if (!singlePost) {
         res.status(404).json({ message: "No single post found with this id" });
@@ -101,20 +106,20 @@ router.delete("/:id", withAuth, async (req, res) => {
 // // This should be a protected route, so you'll need to use the withAuth middleware
 // router.post("/comment/:id", withAuth, async (req, res) => {
 //     try {
-//       const commentData = await Comment.create(
+//       const comment = await Comment.create(
 //         {
 //           body: req.body.body,
 //           userId: req.session.userId,
 //           postId: req.body.postId,
 //         });
-//       res.status(200).json(commentData);
+//       res.status(200).json(comment);
 //       console.log('Comment created');
 //     } catch (err) {
 //       res.status(500).json(err);
 //     }
 //   });
 
-//   //get all comments
+  //get all comments
 // router.get("/comment", withAuth, async (req, res) => {
 //     try {
 //         const comment = await Comment.findAll({

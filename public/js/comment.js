@@ -1,29 +1,25 @@
-document.querySelector(".comment-btn").addEventListener("submit", async (event) => {
-
-    event.preventDefault();
-  
-    const commentArea = document.querySelector(".comment-input").value;
-    // const post_id = document.querySelector(".postId").value;
-  
-      const response = await fetch(`/api/comment`, {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json" 
-        },
-        body: JSON.stringify({ 
-          body: commentArea
-        }),
-        
-      });
-      
-      console.log(response);
-
-      if (response.ok) {
-        document.location.replace('/dashboard');
-        //console.log("Comment posted");
-      } else {
-        alert("Failed to post comment");
-        //console.log("Comment failed to post");
-      }
+var commentFormHandler = async (event) => {
+  //event.preventDefault();
+  const postId = document.querySelector(".comment-btn").getAttribute("value");
+  const textArea = document.querySelector("#textArea");
+ 
+  const response = await fetch('/api/comments', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        body: textArea.value,
+        postId: postId,
+      }),
     });
-  
+
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    } else {
+      alert('Failed to create comment');
+    }
+  };
+
+
+document
+  .querySelector(".comment-form")
+  .addEventListener("submit", commentFormHandler);
