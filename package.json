@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "start": "node server.js"
+        "start": "node server.js",
+        "seed": "node seeds/server.js"
     
     },
     "dependencies": {
@@ -16,5 +17,6 @@
         "handlebars": "^4.7.7",
         "mysql2": "^2.0.1",
         "sequelize": "^6.28.0"
+        
     }
 }
