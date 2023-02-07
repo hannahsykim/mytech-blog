@@ -14,6 +14,8 @@
 
   ## Description <a id="description"></a>
   A CMS-style blog site similar to a Wordpress site where developers can publish their blog posts and comment on other developer's blog posts as well. The app follows the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.
+  
+  https://hannahs-tech-blog.herokuapp.com/
 
   ## Visual <a id="visual"></a>
 <img width="1704" alt="image" src="https://user-images.githubusercontent.com/113808775/217158116-642d145c-3a77-4376-839f-00ca95e8beb3.png">
